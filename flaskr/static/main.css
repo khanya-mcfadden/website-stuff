@@ -4,7 +4,7 @@ html {
   }
   
   .highlight {
-    color: #b21f75;
+    color: #e00d88;
     font-weight: bold;
   }
   
@@ -35,7 +35,7 @@ html {
   }
   
   .cookie-consent button {
-    background-color: #055cbc;
+    background-color: #5f5f5f;
     border: none;
     border-radius: 4px;
     color: white;
@@ -120,7 +120,7 @@ html {
     display: flex;
     justify-content: space-between;
     padding: 10px;
-    border-bottom: 2.5px dashed #39b5e8;
+    border-bottom: 2.5px dashed #ccc;
     margin-bottom: 5rem;
   }
   
@@ -142,7 +142,7 @@ html {
   }
   
   .navbar {
-    background-color: #0099db7d;
+    background-color: #7a7a7a7d;
     display: flex;
     top: 0;
     justify-content: space-between;
@@ -230,28 +230,28 @@ html {
   .season_title {
     box-sizing: border-box;
     max-width: 900px;
-    border: 1px solid #0098db;
+    border: 1px solid #666;
     display: flex;
     justify-content: flex-start;
     height: auto;
     width: 50%;
     margin-bottom: 0px;
     flex-direction: column;
-    background-color: #39b5e8;
+    background-color: #ccc;
     text-align: center;
   }
   
   .Ai_title {
     box-sizing: border-box;
     max-width: 900px;
-    border: 1px solid #0098db;
+    border: 1px solid #666;
     display: flex;
     justify-content: flex-start;
     height: auto;
     width: 50%;
     margin-bottom: 0px;
     flex-direction: column;
-    background-color: #39b5e8;
+    background-color: #ccc;
     text-align: center;
   }
   
@@ -300,7 +300,7 @@ html {
     border: 1px solid #aaaaaa80;
     text-align: center;
     width: 200px;
-    color: #333333;
+    color: #333;
     padding: 40px;
   }
   
@@ -317,9 +317,9 @@ html {
     left: 0;
     width: 100%;
     padding: 10px;
-    background: #f7f7f7;
+    background: #eee;
     text-align: center;
-    color: #000000;
+    color: #000;
     margin-top: 5rem;
   }
   
@@ -370,7 +370,7 @@ html {
   }
   
   .footer .section-title {
-    color: #0a142f;
+    color: #333;
     font-size: 18px;
     font-family: Inter;
     font-weight: 400;
@@ -379,7 +379,7 @@ html {
   }
   
   .footer .section-content {
-    color: #0a142f;
+    color: #333;
     font-size: 14px;
     font-family: Inter;
     font-weight: 400;
@@ -388,7 +388,7 @@ html {
   }
   
   .footer .copyright {
-    color: #0a142f;
+    color: #333;
     font-size: 16px;
     font-family: Inter;
     font-weight: 400;
@@ -397,22 +397,20 @@ html {
   }
   
   clours1 {
-    color: #fff 
-    #c9c8c8 
-    #aaaaaa 
-    #7f7f7f 
-    #000 
-    #00ffff 
-    #39b5e8 
-    #0098db 
-    #0571d2  
-    #055cbc
-    #034082 
-    #012246 
-    #00a499 
-    #056948 
-    #009633 
-    #77c001 
-    #fbe201 
-    #b21f75;
+    color: 
+    #eee
+    #ddd
+    #ccc
+    #bbb
+    #9a9
+    #888
+    #777
+    #666
+    #555
+    #444
+    #333
+    #222
+    #111
+    #000
+    ;
   }
