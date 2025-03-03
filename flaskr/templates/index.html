@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>{% block title %}Home Page{% endblock %}</title>
+  <link rel="stylesheet" href="/static/main.css" />
+
+</head>
+
+<body>
+  <div class="welcome">
+    <div style="
+          display: flex;
+          align-items: center;
+          justify-content: left;
+          flex-wrap: wrap;
+          padding: 10px;
+        ">
+      <img id="logo" src="{{ url_for('static', filename='logo.png') }}" alt="health group website Logo"
+        style="margin: 5px; width: 100px; max-width: 100%; height: auto" />
+      <div style="display: flex; flex-direction: column;">
+        <h1 style="text-align: left; margin: 10px; font-size: 50px;">
+          Welcome to the Trustees of Health Advice Group
+        </h1>
+        <h2 style="color: #055cbc; margin: 10px; font-size: medium; text-align: left;">
+          Your Trusted Partner in Health and Wellness
+        </h2>
+      </div>
+    </div>
+  </div>
+  <nav class=" navbar">
+  </nav>
+  <nav class="nav">
+    <!-- base page links -->
+    <a href="/" style="color: #0571d2; font-size: 1.5em">Home</a>
+    <a href="/about_page" style="color: #0571d2; font-size: 1.5em">About</a>
+    <a href="/weather_page" style="color: #0571d2; font-size: 1.5em">weather</a>
+    <a href="/BookingPage" style="color: #0571d2; font-size: 1.5em">Booking</a>
+    <a href="/articles_page" style="color: #0571d2; font-size: 1.5em">Articles</a>
+    <!-- admin page links -->
+    {% if admin %}
+    <a href="/usersinfo" style="color: #0571d2; font-size: 1.5em; margin-left: auto">User Info</a>
+    <a href="/test" style="color: #0571d2; font-size: 1.5em">Test</a>
+    <!-- loged in page lnks -->
+    {% if authenticated %}
+    <a href="/profile" style="color: #0571d2; font-size: 1.5em">Profile</a>
+    <!-- pages that are only there when signed out -->
+    {% endif %} {% else %}
+    <a href="/Sign-Up" style="color: #0571d2; font-size: 1.5em; margin-left: auto">Sign Up</a>
+    <a href="/login" style="color: #0571d2; font-size: 1.5em">Login</a>
+    {% endif %}
+  </nav>
+  <div class="gradient-navbar"></div>
+
+  {% block content %}
+    <p style="font-size: 2.5rem; text-align: center; color: #003348;">
+      We are glad to have you here. Explore and enjoy your stay!
+    </p>
+ 
+  <div
+    style="background-image: url('/static/istockphoto-1299926607-2048x2048.jpg'); background-size: cover; width: 100%; height: auto; text-align: center; padding: 20px; overflow: hidden">
+
+
+    <!-- titles -->
+    <div style="display: flex; justify-content: space-between; width: 100%;">
+      <div id="season_title" class="season_title" style="height: auto; width: 50%">
+        <h1>How to deal with the season:</h1>
+      </div>
+
+      <div id="Ai_title" class="Ai_title" style="height: auto; width: 50%">
+        <h1>How to deal with the season ai edition:</h1>
+      </div>
+    </div>
+
+    <!-- seasonal advice containers -->
+    <div style="display: flex; justify-content: space-between; width: 100%; ">
+      <!-- non ai -->
+      <div class="container" style="height: auto; width: 50%; background-color: #fff;">
+        <h2><span id="season"></span></h2>
+        <div class="advice-box" id="advice-box"></div>
+      </div>
+      <!-- ai -->
+      <div class="container" style="height: auto; width: 50%; background-color: #fff;">
+        <h2>questions chat bot</h2>
+        <div id="loading" style="display: none; text-align: center;">
+          <p>Loading...</p>
+        </div>
+        <div id="ai-response" class="ai-response" style="font-size: larger"></div>
+        <input type="text" id="ai-question" placeholder="Ask a question..." style="bottom: 0;" />
+
+        <button type="submit" style="padding: 10px;">Ask</button>
+
+      </div>
+    </div>
+
+
+    <div class="clearfix"></div>
+
+
+  </div>
+  <!-- cookies -->
+  {% if not request.cookies.get('cookie_consent') %}
+  <div id="cookie-consent" class="cookie-consent" style="
+        text-align: center;
+        position: fixed;
+        top: 0;
+        left: -50%;
+        width: 200%;
+        height: 100%;
+        display: flex;
+        backdrop-filter: blur(10px);
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      ">
+    <div style="border-radius: 20px">
+      <p>
+        We use cookies to improve your experience.
+        <br />
+        By using our site, you agree to our use of cookies.
+      </p>
+      <form method="post" action="/set_cookie">
+        <button type="submit" class="btn">Accept</button>
+      </form>
+    </div>
+  </div>
+  <br />
+  {% endif %} {% endblock %}
+  <!-- footer -->
+  <div class="footer" id="footer">
+    <footer>
+      <div class="footer-container">
+        <div class="footer-column">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="/weather_page">weather</a></li>
+            <li><a href="/articles">articles</a></li>
+            <li><a href="/BookingPage">assesments</a></li>
+            <li><a href="/about_page">Newcomers</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Learning</h4>
+          <ul>
+            <li><a href="/unfinishedpagepage">Learn Hub</a></li>
+            <li><a href="/unfinishedpagepage">Tutorials</a></li>
+            <li><a href="/unfinishedpagepage">Communities</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>About</h4>
+          <ul>
+            <li><a href="#">Company</a></li>
+            <li><a href="#">Legal</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-logo">
+        <img src="https://via.placeholder.com/100x50" alt="Lift Logo" />
+      </div>
+
+      <div class="footer-bottom">© 2020 Lift Media. All rights reserved.</div>
+
+      <div class="social-icons">
+        <a href="https://en-gb.facebook.com/login.php/">Facebook</a>
+        <a href="https://x.com/login?mx=2">Twitter</a>
+        <a href="https://www.instagram.com/accounts/login/">Instagram</a>
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>
+
+
+
+
+<!-- scripts -->
+
+
+
+
+
+
+
+
+<!-- script for ai api -->
+<script>
+  const submitButton = document.querySelector('button[type="submit"]');
+  submitButton.addEventListener('click', function (event) {
+    event.preventDefault();
+    const question = document.getElementById('ai-question').value.trim();
+    if (!question) {
+      document.getElementById("ai-response").innerHTML = "<p>You must type something in to get a response</p>";
+      return;
+    }
+    if (question.toLowerCase().includes("code")) {
+      document.getElementById("ai-response").innerHTML = "<p>Sorry, I can't assist with code-related questions.</p>";
+      return;
+    }
+    document.getElementById("loading").style.display = "block"; // Show loading indicator
+    fetch("/Ai_data", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ question: question })
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("AI data received:", data); // Log the data received
+        document.getElementById("loading").style.display = "none"; // Hide loading indicator
+        const response1 = data.response1 ? data.response1.replace(/\*/g, '') : 'No response1 available';
+        document.getElementById("ai-response").innerHTML = `
+        <p>${response1}</p>
+      `;
+      })
+      .catch((error) => {
+        console.error("Error fetching AI data:", error);
+        document.getElementById("loading").style.display = "none"; // Hide loading indicator
+        document.getElementById("ai-response").innerHTML = "<p>Failed to load AI response</p>";
+      });
+  });
+
+  // Function to fetch general health recommendation based on location on page load from 
+  window.onload = function () {
+    fetch('/weather_data')
+      .then(response => response.json())
+      .then(data => {
+        if (data.error) {
+          console.error('Error fetching weather data:', data.details);
+          document.getElementById('forecast').innerHTML = '<p>Failed to load weather data</p>';
+          return;
+        }
+        const location = data.location.name;
+        fetch("/Ai_data", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ question: `What is the current general weather advice or recommendations for ${location}? Keep it under 150 words. Recommend that the user goes to the weather page on the current website for more details. as well as the met office` })
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log("AI data received on load:", data); // Log the data received
+            const response1 = data.response1 ? data.response1.replace(/\*/g, '') : 'No response1 available';
+            document.getElementById("ai-response").innerHTML = `
+              <p>${response1}</p>
+            `;
+          })
+          .catch((error) => {
+            console.error("Error fetching AI data on load:", error);
+          });
+      })
+      .catch(error => {
+        console.error('Error fetching weather data:', error);
+        document.getElementById('forecast').innerHTML = '<p>Failed to load weather data</p>';
+      });
+  };
+</script>
+
+
+
+
+
+
+
+
+<!-- script for logging location -->
+<script>
+  document.getElementById('find-me').addEventListener('click', () => {
+    const status = document.getElementById('status');
+    const cityName = document.getElementById('city-name');
+    const mapLink = document.getElementById('map-link');
+    const latLon = document.getElementById('lat-lon');
+
+    // Check if Geolocation is available
+    if (!navigator.geolocation) {
+      status.textContent = 'Geolocation is not supported by your browser.';
+      return;
+    }
+
+    status.textContent = 'Locating…';
+
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude } = position.coords;
+
+        // Update the map link
+        mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
+        mapLink.textContent = `View on Map`;
+
+        // Reverse geocoding to get the city name
+        try {
+          const response = await fetch(
+            `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
+          );
+          const data = await response.json();
+
+          if (data && data.city) {
+            cityName.textContent = `City: ${data.city}`;
+            latLon.textContent = `Lat: ${latitude}, Lon: ${longitude}`;
+          } else {
+            cityName.textContent = `Lat: ${latitude}, Lon: ${longitude}`;
+            latLon.textContent = '';
+          }
+          status.textContent = '';
+        } catch (error) {
+          status.textContent = 'Failed to fetch city name.';
+        }
+      },
+      () => {
+        status.textContent = 'Unable to retrieve your location.';
+      }
+    );
+  });
+</script>
+
+
+
+<!--  script for seaonal advice  -->
+<script>
+  fetch("/weather_data")
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.error) {
+        console.error("Error fetching weather data:", data.details);
+        document.getElementById("forecast").innerHTML =
+          "<p>Failed to load weather data</p>";
+        return;
+      }
+      const forecastContainer = document.getElementById("forecast");
+      forecastContainer.innerHTML = data.forecast.forecastday
+        .map((day, index) => {
+          const date = new Date(day.date);
+          const options = {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          };
+          const formattedDate =
+            index === 0 ? "Today" : date.toLocaleDateString("en-US", options);
+          return `
+                  <div class="weather-card">
+                      <h2>${data.location.name} - ${formattedDate}</h2>
+                      <img src="${day.day.condition.icon}" alt="Weather Icon">
+                      <p>${day.day.condition.text}</p>
+                      <p>Max Temp: ${day.day.maxtemp_c}&deg;C</p>
+                      <p>Min Temp: ${day.day.mintemp_c}&deg;C</p>
+                  </div>
+              `;
+        })
+        .join("");
+    })
+    .catch((error) => {
+      console.error("Error fetching weather data:", error);
+      document.getElementById("forecast").innerHTML =
+        "<p>Failed to load weather data</p>";
+    });
+  const advice = {
+    winter: [
+      "<span class='highlight'>Stay Warm</span>         :Dress in layers to keep warm and protect against the cold.",
+      "<span class='highlight'>Hydrate</span>           : Drink plenty of water to stay hydrated, as indoor heating can cause dehydration.",
+      "<span class='highlight'>Moisturize</span>        : Use moisturizers to prevent dry skin caused by cold weather and indoor heating.",
+      "<span class='highlight'>Eat Nutritiously</span>  : Consume a balanced diet rich in vitamins and minerals to boost your immune system .Exercise Indoors: Engage in indoor physical activities to stay active and maintain fitness.",
+      "<span class='highlight'>Get Vaccinated</span>    : Ensure you are up-to-date with flu vaccinations to protect against seasonal flu",
+      "<span class='highlight'>Wash Hands</span>         : Practice good hygiene by washing hands frequently to prevent the spread of germs..",
+      "<span class='highlight'>Stay Connected</span>  : Maintain social connections to combat winter blues and seasonal affective disorder (SAD).",
+    ],
+    spring: [
+      "<span class='highlight'>Allergy Management</span> : Keep windows closed during high pollen days and take antihistamines if needed.",
+      "<span class='highlight'>Stay Active</span> : Take advantage of the mild weather to engage in outdoor activities like walking or cycling.",
+    ],
+    summer: [
+      "<span class='highlight'>Stay Hydrated</span> : Drink plenty of water to stay hydrated in the heat.",
+      "<span class='highlight'>Sun Protection</span> : Wear sunscreen, hats, and sunglasses to protect against harmful UV rays.",
+    ],
+    autumn: [
+      "<span class='highlight'>Layer Up</span> : Dress in layers to adjust to fluctuating temperatures.",
+      "<span class='highlight'>Boost Immunity</span> : Eat a diet rich in vitamins to strengthen your immune system for the cold season.",
+    ],
+  };
+
+  function getSeason() {
+    const month = new Date().getMonth();
+    if (month >= 2 && month <= 4) return "spring";
+    if (month >= 5 && month <= 7) return "summer";
+    if (month >= 8 && month <= 10) return "autumn";
+    return "winter";
+  }
+
+  function displayAdvice() {
+    const season = getSeason();
+    document.getElementById("season").textContent = season;
+    const seasonAdvice = advice[season] || [
+      "No advice available for this season.",
+    ];
+    document.getElementById("advice-box").innerHTML = seasonAdvice
+      .map((item) => `<p>${item}</p>`)
+      .join("");
+  }
+
+  displayAdvice();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- script for weather  -->
+<script>
+  fetch('/weather_data')
+    .then(response => response.json())
+    .then(data => {
+      if (data.error) {
+        console.error('Error fetching weather data:', data.details);
+        document.getElementById('forecast').innerHTML = '<p>Failed to load weather data</p>';
+        return;
+      }
+      const forecastContainer = document.getElementById('forecast');
+      forecastContainer.innerHTML = data.forecast.forecastday.map((day, index) => {
+        const date = new Date(day.date);
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const formattedDate = index === 0 ? 'Today' : date.toLocaleDateString('en-US', options);
+        return `
+        <div class="weather-card">
+            <h2>${data.location.name} - ${formattedDate}</h2>
+            <img src="${day.day.condition.icon}" alt="Weather Icon">
+            <p>${day.day.condition.text}</p>
+            <p>Max Temp: ${day.day.maxtemp_c}&deg;C</p>
+            <p>Min Temp: ${day.day.mintemp_c}&deg;C</p>
+        </div>
+    `;
+      }).join('');
+    })
+    .catch(error => {
+      console.error('Error fetching weather data:', error);
+      document.getElementById('forecast').innerHTML = '<p>Failed to load weather data</p>';
+    });
+</script>
