@@ -82,14 +82,14 @@ def BookingPage_page():
         return redirect(url_for("login"))
 
     if request.method == "POST":
-        course = request.form.get("courses")
+        assesor = request.form.get("assesor")
         date = request.form.get("date")
         time = request.form.get("time")
 
-        if not course or not date or not time:
+        if not assesor or not date or not time:
             return "Please fill out all fields", 400
 
-        connection = sqlite3.connect("users.db")
+        connection = sqlite3.connect("user.db")
         cursor = connection.cursor()
 
         # Create bookings table if it doesn't exist
@@ -97,11 +97,11 @@ def BookingPage_page():
             """
             CREATE TABLE IF NOT EXISTS bookings (
                 booking_id INTEGER PRIMARY KEY,
-                courses TEXT NOT NULL,
+                assesor id INTEGER,
                 date TEXT NOT NULL,
                 time TEXT NOT NULL,
                 username TEXT NOT NULL,
-                FOREIGN KEY (username) REFERENCES users(username)
+                FOREIGN KEY (username) REFERENCES user(username)
             )
         """
         )
@@ -109,8 +109,8 @@ def BookingPage_page():
         try:
             # Insert the booking
             cursor.execute(
-                "INSERT INTO bookings (courses, date, time, username) VALUES (?, ?, ?, ?)",
-                (course, date, time, session.get("username")),
+                "INSERT INTO bookings (assesor, date, time, username) VALUES (?, ?, ?, ?)",
+                (assesor, date, time, session.get("username")),
             )
             connection.commit()
             connection.close()
@@ -119,19 +119,18 @@ def BookingPage_page():
             connection.close()
             return f"Booking failed: {e}", 500
 
-    # Fetch available courses from the database
-    connection = sqlite3.connect("users.db")
+    # Fetch available assesor from the database
+    connection = sqlite3.connect("user.db")
     cursor = connection.cursor()
-    cursor.execute(
-        "SELECT course_name FROM courses"
-    )  # Adjust table/column names as needed
-    courses = cursor.fetchall()
+    cursor.execute("SELECT name FROM assesor")  # Adjust table/column names as needed
+    booking = cursor.fetchall()
     connection.close()
 
     # Pass courses to the template
     return render_template(
-        "BookingPage.html", courses=[course[0] for course in courses]
+        "BookingPage.html", assesor=[assesor[0] for assesor in booking]
     )
+
 
 @app.route("/unfinishedpagepage", methods=["GET", "POST"])
 def unfinishedpage_page():
