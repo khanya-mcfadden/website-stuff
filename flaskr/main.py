@@ -604,44 +604,11 @@ def get_Ai():
     response = chat.send_message(question)
     response_text = response.text
 
-    # Function to check if the response is related to weather or health
+    # Function to check if the response is related to what is needed(currantly uneeded)
     def is_relevant_response(response):
-        health_keywords = [
-            "health",
-            "wellness",
-            "fitness",
-            "hydration",
-            "nutrition",
-            "hypothermia",
-            "illness",
-            "disease",
-            "symptoms",
-            "treatment",
-            "medicine",
-            "doctor",
-            "hospital",
-            "emergency",
-            "injury",
-            "pain",
-            "recovery",
-            "therapy",
-            "mental health",
-            "physical health",
-        ]
-        weather_keywords = [
-            "weather",
-            "temperature",
-            "forecast",
-            "rain",
-            "snow",
-            "sunny",
-            "cloudy",
-            "storm",
-            "wind",
-            "humidity",
-            "climate",
-        ]
-        return any(keyword in response.lower() for keyword in health_keywords + weather_keywords)
+        keywords_1 = []
+        keywords_2 = []
+        return any(keyword in response.lower() for keyword in keywords_1 + keywords_2)
 
     # Filter the response
     if is_relevant_response(response_text):
